@@ -4,7 +4,8 @@ var gulp = require('gulp'),
   sourcemap = require('gulp-sourcemaps'),
   del = require('del'),
   concat = require('gulp-concat'),
-  traceur = require('gulp-traceur');
+  traceur = require('gulp-traceur'),
+  runSequence = require('run-sequence');
 
 
 gulp.task('clean', del.bind(null, ['./build']));
@@ -48,5 +49,13 @@ gulp.task('watch', function () {
 });
 
 
-gulp.task('default', ['compile-to5', 'compile-traceur', 'copy']);
-gulp.task('serve', ['default', 'connect', 'watch']);
+gulp.task('compile', function (done) {
+  runSequence('clean', [
+    'compile-to5',
+    'compile-traceur',
+    'copy'
+  ]);
+});
+
+gulp.task('default', ['compile']);
+gulp.task('serve', ['compile', 'connect', 'watch']);
