@@ -4,7 +4,7 @@ console.log('-------------------------------------------------------------------
 
 // not work
 
-//function* bar () {
+//function *bar () {
 //  var n = 1;
 //
 //  while (n < 10) {
